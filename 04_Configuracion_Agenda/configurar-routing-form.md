@@ -46,7 +46,7 @@ Requiere el plan **Standard** de Calendly (el mismo que ya se activó para tener
 
 5. Texto del mensaje personalizado para la regla 2 (pantalla final, sin botón de agenda):
 
-   > ¡Gracias por contarnos sobre tu proyecto! Por ahora está en una etapa temprana, así que te dejamos un recurso útil: descarga nuestro ebook y descubre cómo la geotecnia aporta seguridad y precisión a cada proyecto → [link ebook]
+   > ¡Gracias por contarnos sobre tu proyecto! Por ahora está en una etapa temprana, así que te dejamos un recurso útil: descarga nuestro ebook y descubre cómo la geotecnia aporta seguridad y precisión a cada proyecto → https://drive.google.com/drive/folders/11fBvMaf0CcrwwCzKLfWTLzkaEWptCy4B?usp=sharing
    >
    > Trabajamos con clientes como Ausenco, Icafal, IDOM, Pan American Silver, Colbún y SQM, en proyectos mineros, energéticos, de infraestructura pública y privados.
    >
@@ -63,6 +63,6 @@ Requiere el plan **Standard** de Calendly (el mismo que ya se activó para tener
 ## Pendiente
 
 - [ ] Crear el formulario en Calendly con las reglas de arriba
-- [ ] Confirmar/crear el link de descarga del ebook (falta definirlo — hoy no existe un link público)
+- [x] Link de descarga del ebook — carpeta de Google Drive compartida (ver regla 2)
 - [ ] Reemplazar los links en LinkedIn (Featured) y en el guion
 - [ ] Repetir este mismo proceso para GEOSOM (`guion-calificacion-prospectos.md` sección 3 de ese repo ya tiene la lógica de calificación equivalente)

@@ -98,7 +98,7 @@ Si elige "Solo quiero información" → ofrecer el ebook/contenido educativo (ve
 
 > ¡Gracias por contarme! Por ahora tu proyecto está en una etapa temprana, así que te dejo un recurso útil:
 >
-> 📘 Descarga nuestro ebook y descubre cómo la geotecnia aporta seguridad y precisión a cada proyecto: [link ebook]
+> 📘 Descarga nuestro ebook y descubre cómo la geotecnia aporta seguridad y precisión a cada proyecto: https://drive.google.com/drive/folders/11fBvMaf0CcrwwCzKLfWTLzkaEWptCy4B?usp=sharing
 >
 > Trabajamos con clientes como Ausenco, Icafal, IDOM, Pan American Silver, Colbún y SQM, en proyectos mineros, energéticos, de infraestructura pública (MOP) y privados.
 >
