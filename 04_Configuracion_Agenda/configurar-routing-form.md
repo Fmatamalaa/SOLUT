@@ -52,7 +52,9 @@ Requiere el plan **Standard** de Calendly (el mismo que ya se activó para tener
    >
    > Cuando tengas más definido el proyecto, contáctanos directo: +56 9 3006 2244 / contacto@solut.cl
 
-6. **Publica** el formulario y copia su link (algo como `calendly.com/fmatamala-solut/calificacion-proyecto-solut`).
+6. **Publica** el formulario y copia su link.
+
+**Link publicado: https://calendly.com/d/ds97-kdr-szb**
 
 ## Dónde usar el link del formulario a partir de mañana
 
@@ -62,7 +64,7 @@ Requiere el plan **Standard** de Calendly (el mismo que ya se activó para tener
 
 ## Pendiente
 
-- [ ] Crear el formulario en Calendly con las reglas de arriba
+- [x] Crear el formulario en Calendly con las reglas de arriba
 - [x] Link de descarga del ebook — carpeta de Google Drive compartida (ver regla 2)
 - [ ] Reemplazar los links en LinkedIn (Featured) y en el guion
 - [ ] Repetir este mismo proceso para GEOSOM (`guion-calificacion-prospectos.md` sección 3 de ese repo ya tiene la lógica de calificación equivalente)

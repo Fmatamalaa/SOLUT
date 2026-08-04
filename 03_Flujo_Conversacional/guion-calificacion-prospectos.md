@@ -6,6 +6,8 @@ Objetivo del flujo: captar el prospecto → identificar qué servicio necesita �
 
 Contacto vigente (confirmado en ebook 2026): **+56 9 3006 2244** o **+56 9 7586 1050** / contacto@solut.cl / www.solut.cl. Oficinas en Concepción (Aníbal Pinto 340 y Maipú 1623).
 
+**Automatización activa**: el formulario de calificación automática ya está publicado → **https://calendly.com/d/ds97-kdr-szb** (ver `04_Configuracion_Agenda/configurar-routing-form.md`). Este es el link que va en LinkedIn (Featured/bio, CTA de posts) para que el filtro ocurra solo. Los links directos de las secciones 4 y 5 de este documento se usan solo si alguien está calificando manualmente por chat/DM.
+
 ---
 
 ## 1. Mensaje de bienvenida
