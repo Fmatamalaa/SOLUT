@@ -90,9 +90,11 @@ Si elige "Solo quiero información" → ofrecer el ebook/contenido educativo (ve
 >
 > Agendemos tu **evaluación técnica** con nuestro equipo de ingeniería geotécnica — revisamos tu caso y definimos el alcance (sondajes, ensayos, laboratorio, etc.) según lo que necesitas.
 >
-> 👉 [Link agenda virtual]
+> 👉 https://calendly.com/fmatamala-solut/new-meeting
 >
 > También puedes escribirnos directo al +56 9 3006 2244 / +56 9 7586 1050 o contacto@solut.cl.
+
+> Nota: link temporal/compartido (plan gratuito de Calendly, 1 solo tipo de evento). Cuando se active el plan pago, reemplazar por el link específico de "Evaluación Técnica SOLUT" (ver `04_Configuracion_Agenda/configurar-calendly.md`).
 
 ## 5. Mensaje de cierre — No calificado aún / solo información
 
