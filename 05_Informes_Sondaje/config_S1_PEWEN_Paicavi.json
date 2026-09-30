@@ -1,0 +1,65 @@
+{
+  "mandante": "PEWEN Geotecnia",
+  "cliente": "PEWEN Geotecnia",
+  "proyecto": "EMS Edificio Paicaví / Vicuña Mackenna",
+  "localidad": "Concepción",
+  "ubicacion": "Av. Paicaví / Vicuña Mackenna, Concepción",
+  "linea_portada": "PEWEN GEOTECNIA — Edificio Paicaví / Vicuña Mackenna, Región del Biobío",
+  "sondaje": "S-1",
+  "sondaje_corto": "S-1",
+  "metodo": "Sondaje con recuperación de muestras y ensayo SPT",
+  "sistema": "HQ",
+  "huso": 18,
+  "fechas": "28.09.2026",
+  "codigo": "SOL-LT-S1-2026",
+  "revision": "0",
+  "fecha_revision": "30.09.2026",
+  "elaboro": "Dpto. Geotecnia SOLUT",
+  "reviso": "F. Matamala A.",
+  "aprobo": "F. Matamala A.",
+  "unidades": [
+    [
+      "U-I",
+      0.0,
+      0.8,
+      "Pavimento y relleno superficial: hormigón de radier (0,00–0,11 m) sobre base estabilizada granular (hasta 0,42 m) y arena fina gris con restos de construcción. SPT: N = 27 (preliminar)."
+    ],
+    [
+      "U-II",
+      0.8,
+      5.1,
+      "Arena fina de color grisáceo, humedad natural media y sin plasticidad aparente, con presencia aislada de restos de ladrillo entre 2,55 y 3,10 m y de limo café hacia 5,10 m. Compacidad baja a media (N = 9–14)."
+    ],
+    [
+      "U-III",
+      5.1,
+      12.1,
+      "Arena fina gris, humedad natural media, sin plasticidad. Compacidad media a alta (N = 14–31)."
+    ],
+    [
+      "U-IV",
+      12.1,
+      15.1,
+      "Arena fina a muy fina, localmente limosa y con olor entre 13,55 y 14,10 m. Compacidad alta a muy alta (N = 39–54)."
+    ],
+    [
+      "U-V",
+      15.1,
+      17.1,
+      "Arena fina gris, humedad natural media, sin plasticidad. Compacidad media (N = 13–16)."
+    ],
+    [
+      "U-VI",
+      17.1,
+      22.1,
+      "Arena fina a semigruesa gris, con olor entre 18,55 y 19,55 m. Compacidad muy alta (N = 50–72)."
+    ]
+  ],
+  "texto_resumen_tabla": "Los primeros 0,11 m corresponden a hormigón de radier, seguido de base estabilizada granular hasta 0,42 m. Bajo ese nivel predomina arena fina de color grisáceo, humedad natural media y sin plasticidad aparente, con presencia aislada de restos de ladrillo (0,42–0,80 m y 2,55–3,10 m) y de limo (4,55–5,17 m), y arena muy fina limosa con olor entre 13,55 y 14,10 m. Desde 21,55 m se registra arena semigruesa de color gris.",
+  "observaciones": [
+    "El sondaje S-1 se ejecutó el 28.09.2026 (fecha de registro en ESKUAD), alcanzando una profundidad final de 22,10 m.",
+    "Bajo el pavimento superficial (hormigón de radier y base estabilizada) predomina arena fina de color grisáceo, con humedad natural media y sin plasticidad aparente; en profundidad se registra arena muy fina limosa y, desde 21,55 m, arena semigruesa.",
+    "La compacidad aumenta con la profundidad: baja a media entre 0,80 y 5,10 m, media a alta hasta 12,10 m y alta a muy alta desde 12,10 m, con una disminución local entre 15,10 y 17,10 m.",
+    "Se observa olor en los tramos 13,55–14,10 m, 18,55–19,55 m (arena fina con olor), condición que se deja consignada para su evaluación posterior."
+  ]
+}

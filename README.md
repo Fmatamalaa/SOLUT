@@ -12,6 +12,7 @@ Igual que GEOSOM: un prospecto interactúa con el asistente, entrega datos de su
 - `02_Marketing/` — contenido de marketing (carrusel LinkedIn, etc.)
 - `03_Flujo_Conversacional/` — guion del asistente, preguntas de calificación
 - `04_Configuracion_Agenda/` — configuración de agenda virtual
+- `05_Informes_Sondaje/` — generador de informes de logueo de sondaje desde ESKUAD
 - `05_Notas_Reuniones/`
 
 ## Relación con GEOSOM
