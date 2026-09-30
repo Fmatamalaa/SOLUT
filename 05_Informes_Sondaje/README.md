@@ -27,7 +27,8 @@ recuadros "FOTO PENDIENTE". Se pueden reemplazar a mano o volver a correr el com
 
 ## Notas
 
-- ESKUAD no entrega longitud recuperada (R) ni %R: esas columnas quedan como `s/i`.
+- ESKUAD no entrega longitud recuperada (R) ni %R en el Excel. Se leen del pizarrón de cada foto y se cargan en `"recuperacion"` del config (%R se calcula). Si falta, la columna queda `s/i`.
+- Las fotos exportadas a Drive tienen nombre UUID: se asignan a las muestras en orden de subida (verificar con el pizarrón de cada foto).
 - Intervalos inconsistentes de digitación se corrigen y se informan al ejecutar (avisos).
 - El índice de la ficha es texto fijo: los números de página son estimados; revisar al abrir en Word.
 - Las URLs de fotos de ESKUAD requieren autenticación; si el token no funciona, descargar las fotos desde ESKUAD.

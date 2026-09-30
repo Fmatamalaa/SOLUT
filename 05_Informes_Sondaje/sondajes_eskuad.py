@@ -313,7 +313,7 @@ def preparar_imagen(ruta_origen, n, etiqueta, destino):
         for txt, y, ft in (("FOTO PENDIENTE", 380, fnt), ("Muestra N° %d" % n, 480, fnt2), (etiqueta, 550, fnt2)):
             wt = d.textlength(txt, font=ft)
             d.text(((1620 - wt) / 2, y), txt, fill=(86, 96, 119), font=ft)
-    im.save(destino, "JPEG", quality=88)
+    im.save(destino, "JPEG", quality=85)
 
 
 # --------------------------------------------------------------------------
@@ -422,6 +422,12 @@ def generar_informe(args):
               "logueados entre 0,00 m y %s de profundidad." % (sond, prof_txt))
     set_ptext(find_p(body, "Tabla 1."),
               "Tabla 1. Registro de sondaje %s (0,00 – %s m). Fuente: elaboración propia." % (sond, f2(prof)))
+    rec = {int(k): float(v) for k, v in (cfg.get("recuperacion") or {}).items()}
+    pct = {}
+    for m in ms:
+        if not m["es_spt"] and m["n"] in rec:
+            pct[m["n"]] = int(round(rec[m["n"]] / (m["hasta"] - m["de"]) * 100 + 1e-9))
+    rec_prom = ("%.1f" % (sum(pct.values()) / len(pct))).replace(".", ",") if pct else None
     t1 = tbls[3]
     rows = t1.findall(W + "tr")
     hdr, modelo, modelo_spt = rows[0], rows[1], rows[4]
@@ -434,22 +440,22 @@ def generar_informe(args):
         p_len = m["hasta"] - m["de"]
         vals = [str(m["n"]), "%s – %s" % (f2(m["de"]), f2(m["hasta"])),
                 "-" if m["es_spt"] else f2(p_len),
-                "-" if m["es_spt"] else "s/i",
-                "SPT" if m["es_spt"] else "s/i",
+                "-" if m["es_spt"] else (f2(rec[m["n"]]) if m["n"] in rec else "s/i"),
+                "SPT" if m["es_spt"] else (("%d%%" % pct[m["n"]]) if m["n"] in pct else "s/i"),
                 limpiar_desc(m["desc"])]
         for tc, v in zip(tcs, vals):
             set_cell(tc, v)
         t1.append(tr)
 
-    resumen = cfg.get("texto_resumen_tabla") or (
+    nota_ri = "" if pct else (" Los valores de longitud recuperada (R) y porcentaje de recuperación (%R) no vienen en el "
+                              "registro de ESKUAD y se indican como s/i (sin información).")
+    resumen = (cfg.get("texto_resumen_tabla") or "").replace("{rec_prom}", rec_prom or "s/i") or (
         "Se registran %d ensayos SPT, con valores de N entre %d y %d." % (
             len(spts), min(m["N"] for m in spts), max(m["N"] for m in spts)) if spts else "")
     set_ptext(find_p(body, "Los tramos recuperados"),
-              "Se ejecutaron %d ensayos SPT entre %s y %s m, con valores de N entre %d y %d. %s "
-              "Los valores de longitud recuperada (R) y porcentaje de recuperación (%%R) no vienen en el registro "
-              "de ESKUAD y se indican como s/i (sin información)." % (
+              "Se ejecutaron %d ensayos SPT entre %s y %s m, con valores de N entre %d y %d. %s%s" % (
                   len(spts), f2(spts[0]["de"]), f2(spts[-1]["hasta"]),
-                  min(m["N"] for m in spts), max(m["N"] for m in spts), resumen))
+                  min(m["N"] for m in spts), max(m["N"] for m in spts), resumen, nota_ri))
 
     # ---- sección 4: unidades (borrador) ----
     set_ptext(find_p(body, "La agrupación de unidades"),
@@ -516,7 +522,7 @@ def generar_informe(args):
             h6.addprevious(el)
 
     # ---- sección 6 ----
-    obs = cfg.get("observaciones") or []
+    obs = [o.replace("{rec_prom}", rec_prom or "s/i") for o in (cfg.get("observaciones") or [])]
     obs_ps = [p for p in body.iter(W + "p") if p.find(W + "pPr") is not None
               and p.find(W + "pPr").find(W + "numPr") is not None]
     for p, txt in zip(obs_ps, obs):

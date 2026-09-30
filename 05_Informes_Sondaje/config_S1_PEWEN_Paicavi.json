@@ -1,10 +1,10 @@
 {
   "mandante": "PEWEN Geotecnia",
   "cliente": "PEWEN Geotecnia",
-  "proyecto": "EMS Edificio Paicaví / Vicuña Mackenna",
+  "proyecto": "Edificio Ebco",
   "localidad": "Concepción",
   "ubicacion": "Av. Paicaví / Vicuña Mackenna, Concepción",
-  "linea_portada": "PEWEN GEOTECNIA — Edificio Paicaví / Vicuña Mackenna, Región del Biobío",
+  "linea_portada": "PEWEN GEOTECNIA — Edificio Ebco, Av. Paicaví / Vicuña Mackenna, Región del Biobío",
   "sondaje": "S-1",
   "sondaje_corto": "S-1",
   "metodo": "Sondaje con recuperación de muestras y ensayo SPT",
@@ -55,11 +55,37 @@
       "Arena fina a semigruesa gris, con olor entre 18,55 y 19,55 m. Compacidad muy alta (N = 50–72)."
     ]
   ],
-  "texto_resumen_tabla": "Los primeros 0,11 m corresponden a hormigón de radier, seguido de base estabilizada granular hasta 0,42 m. Bajo ese nivel predomina arena fina de color grisáceo, humedad natural media y sin plasticidad aparente, con presencia aislada de restos de ladrillo (0,42–0,80 m y 2,55–3,10 m) y de limo (4,55–5,17 m), y arena muy fina limosa con olor entre 13,55 y 14,10 m. Desde 21,55 m se registra arena semigruesa de color gris.",
+  "texto_resumen_tabla": "Los primeros 0,11 m corresponden a hormigón de radier, seguido de base estabilizada granular hasta 0,42 m. Bajo ese nivel predomina arena fina de color grisáceo, humedad natural media y sin plasticidad aparente, con presencia aislada de restos de ladrillo (0,42–0,80 m y 2,55–3,10 m) y de limo (4,55–5,17 m), y arena muy fina limosa con olor entre 13,55 y 14,10 m. Desde 21,55 m se registra arena semigruesa de color gris. La recuperación promedio de los tramos muestreados es de {rec_prom}%.",
   "observaciones": [
     "El sondaje S-1 se ejecutó el 28.09.2026 (fecha de registro en ESKUAD), alcanzando una profundidad final de 22,10 m.",
     "Bajo el pavimento superficial (hormigón de radier y base estabilizada) predomina arena fina de color grisáceo, con humedad natural media y sin plasticidad aparente; en profundidad se registra arena muy fina limosa y, desde 21,55 m, arena semigruesa.",
     "La compacidad aumenta con la profundidad: baja a media entre 0,80 y 5,10 m, media a alta hasta 12,10 m y alta a muy alta desde 12,10 m, con una disminución local entre 15,10 y 17,10 m.",
-    "Se observa olor en los tramos 13,55–14,10 m, 18,55–19,55 m (arena fina con olor), condición que se deja consignada para su evaluación posterior."
-  ]
+    "La recuperación de muestra presenta un promedio de {rec_prom}%. Las menores recuperaciones se registran entre 14,55 y 16,10 m (73% y 78%) y entre 20,55 y 21,10 m (45%); en el resto de los tramos es de 86% a 100%.",
+    "Se observa olor en los tramos 13,55–14,10 m y 18,55–19,55 m (arena fina con olor), condición que se deja consignada para su evaluación posterior."
+  ],
+  "recuperacion": {
+    "1": 0.3,
+    "3": 0.5,
+    "5": 0.3,
+    "7": 0.55,
+    "9": 0.55,
+    "11": 0.55,
+    "13": 0.5,
+    "15": 0.55,
+    "17": 0.55,
+    "19": 0.55,
+    "21": 0.55,
+    "23": 0.55,
+    "25": 0.55,
+    "27": 0.55,
+    "29": 0.55,
+    "31": 0.4,
+    "33": 0.43,
+    "35": 0.55,
+    "37": 0.55,
+    "39": 0.55,
+    "41": 0.55,
+    "43": 0.25,
+    "45": 0.5
+  }
 }
