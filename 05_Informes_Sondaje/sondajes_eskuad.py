@@ -105,7 +105,7 @@ def leer_registro(ruta_excel):
         v = [x[1] for x in c]
         muestras.append({
             "rep": n,
-            "de": _num(v[0]), "hasta": _num(v[1]), "n": int(_num(v[2])) or n,
+            "de": _num(v[0]), "hasta": _num(v[1]), "n": n,
             "spt_de": _num(v[3]), "spt_a": _num(v[4]),
             "n1": int(_num(v[5])), "n2": int(_num(v[6])), "n3": int(_num(v[7])),
             "desc": (v[10] or "").strip(),
@@ -120,8 +120,10 @@ def _normalizar(ms):
     """Define tramo definitivo y SPT de cada muestra, detectando inconsistencias de digitación."""
     prev_hasta = 0.0
     for i, m in enumerate(ms):
-        m["es_spt"] = (m["n2"] + m["n3"]) > 0
-        m["N"] = m["n2"] + m["n3"] if m["es_spt"] else None
+        m["es_spt"] = (m["n1"] + m["n2"] + m["n3"]) > 0
+        m["rechazo"] = m["es_spt"] and (max(m["n1"], m["n2"], m["n3"]) >= 50
+                                        or m["desc"].lower().startswith("rechazo"))
+        m["N"] = (m["n2"] + m["n3"]) if (m["es_spt"] and not m["rechazo"]) else None
         sig_de = ms[i + 1]["de"] if i + 1 < len(ms) else None
         cand = [(m["de"], m["hasta"])]
         if m["es_spt"]:
@@ -158,6 +160,8 @@ TIPOS = [  # correcciones ortograficas frecuentes en digitacion de terreno
     (r"\bsi\.? ?[Pp]lasticidad", "sin plasticidad"),
     (r"\bsi plasticidad", "sin plasticidad"),
     (r"matriz final", "matriz fina"),
+    (r"Esxasa muestea", "Escasa muestra"),
+    (r"\.0$", "."),
     (r"grisaceo", "grisáceo"),
     (r"\s+,", ","),
     (r"\s+\.", "."),
@@ -411,7 +415,9 @@ def generar_informe(args):
     set_ptext(find_p(body, "El %R se calcula"),
               "El ensayo SPT registra el número de golpes necesarios para hincar el tomamuestras en tres tramos "
               "consecutivos de 15 cm (N1, N2 y N3). El valor N corresponde a la suma de los golpes de los dos últimos "
-              "tramos (N = N2 + N3), descartándose el primer tramo por asentamiento del equipo.")
+              "tramos (N = N2 + N3), descartándose el primer tramo por asentamiento del equipo." +
+              (" Se registra rechazo cuando se alcanzan 50 golpes sin completar la penetración del tramo."
+               if any(m["rechazo"] for m in ms) else ""))
     set_ptext(find_p(body, "El sondaje S-2 alcanzó"),
               "El sondaje %s alcanzó una profundidad de %s%s. El registro estratigráfico comprende los materiales "
               "logueados desde 0,00 m hasta el término de la perforación." % (sond, prof_txt, sistema))
@@ -449,13 +455,17 @@ def generar_informe(args):
 
     nota_ri = "" if pct else (" Los valores de longitud recuperada (R) y porcentaje de recuperación (%R) no vienen en el "
                               "registro de ESKUAD y se indican como s/i (sin información).")
-    resumen = (cfg.get("texto_resumen_tabla") or "").replace("{rec_prom}", rec_prom or "s/i") or (
-        "Se registran %d ensayos SPT, con valores de N entre %d y %d." % (
-            len(spts), min(m["N"] for m in spts), max(m["N"] for m in spts)) if spts else "")
+    resumen = (cfg.get("texto_resumen_tabla") or "").replace("{rec_prom}", rec_prom or "s/i")
+    nums = [m["N"] for m in spts if m["N"] is not None]
+    rech = [m for m in spts if m["rechazo"]]
+    txt_n = ("con valores de N entre %d y %d" % (min(nums), max(nums))) if nums else "sin valores de N válidos"
+    txt_r = ""
+    if rech:
+        txt_r = ", y rechazo (50 golpes sin completar la penetración) en %d ensayos a %s m" % (
+            len(rech), ", ".join(f2(m["de"]) for m in rech))
     set_ptext(find_p(body, "Los tramos recuperados"),
-              "Se ejecutaron %d ensayos SPT entre %s y %s m, con valores de N entre %d y %d. %s%s" % (
-                  len(spts), f2(spts[0]["de"]), f2(spts[-1]["hasta"]),
-                  min(m["N"] for m in spts), max(m["N"] for m in spts), resumen, nota_ri))
+              "Se ejecutaron %d ensayos SPT entre %s y %s m, %s%s. %s%s" % (
+                  len(spts), f2(spts[0]["de"]), f2(spts[-1]["hasta"]), txt_n, txt_r, resumen, nota_ri))
 
     # ---- sección 4: unidades (borrador) ----
     set_ptext(find_p(body, "La agrupación de unidades"),
@@ -490,8 +500,14 @@ def generar_informe(args):
     for k, m in enumerate(ms, 1):
         tramo = "%s a %s m" % (f2(m["de"]), f2(m["hasta"]))
         if m["es_spt"]:
-            tit = "5.%d Tramo %s – %s m — Ensayo SPT (N1: %d · N2: %d · N3: %d · N: %d)" % (
-                k, f2(m["de"]), f2(m["hasta"]), m["n1"], m["n2"], m["n3"], m["N"])
+            pen_cm = int(round((m["hasta"] - m["de"]) * 100))
+            if m["rechazo"] and m["n2"] == 0 and m["n3"] == 0:
+                det = "Rechazo · N1: %d golpes en %d cm" % (m["n1"], pen_cm)
+            elif m["rechazo"]:
+                det = "N1: %d · N2: %d · N3: %d · N: rechazo" % (m["n1"], m["n2"], m["n3"])
+            else:
+                det = "N1: %d · N2: %d · N3: %d · N: %d" % (m["n1"], m["n2"], m["n3"], m["N"])
+            tit = "5.%d Tramo %s – %s m — Ensayo SPT (%s)" % (k, f2(m["de"]), f2(m["hasta"]), det)
             cap = "Foto %d. Ensayo SPT — tramo %s, %s." % (k, tramo, sc)
         else:
             tit = "5.%d Tramo %s – %s m (P: %s m)" % (k, f2(m["de"]), f2(m["hasta"]), f2(m["hasta"] - m["de"]))

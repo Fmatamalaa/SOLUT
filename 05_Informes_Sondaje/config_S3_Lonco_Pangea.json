@@ -1,0 +1,78 @@
+{
+  "mandante": "Pangea Ingeniería",
+  "cliente": "Pangea Ingeniería",
+  "proyecto": "Edificio Lonco Parque",
+  "localidad": "Lonco, Chiguayante",
+  "ubicacion": "Lonco, camino a Chiguayante, Región del Biobío",
+  "linea_portada": "PANGEA INGENIERÍA — Edificio Lonco Parque, Lonco (Chiguayante), Región del Biobío",
+  "sondaje": "S-3",
+  "sondaje_corto": "S-3",
+  "metodo": "Sondaje con recuperación de muestras y ensayo SPT",
+  "sistema": "HQ",
+  "huso": 18,
+  "coordenadas": "[COMPLETAR – no registradas en ESKUAD]",
+  "fechas": "30.09.2026",
+  "codigo": "SOL-LT-S3-2026",
+  "revision": "0",
+  "fecha_revision": "01.10.2026",
+  "elaboro": "Dpto. Geotecnia SOLUT",
+  "reviso": "F. Matamala A.",
+  "aprobo": "F. Matamala A.",
+  "recuperacion": {
+    "2": 0.65,
+    "4": 0.55,
+    "6": 0.28,
+    "8": 0.4,
+    "10": 0.15,
+    "12": 0.3,
+    "14": 0.3,
+    "16": 0.55,
+    "18": 0.55,
+    "20": 0.45,
+    "22": 0.55,
+    "24": 0.86,
+    "26": 0.55,
+    "28": 0.57,
+    "30": 0.9
+  },
+  "unidades": [
+    [
+      "U-I",
+      0.0,
+      1.55,
+      "Maicillo de color café, humedad natural media y sin plasticidad aparente, con restos de hormigón entre 0,45 y 1,10 m. Compacidad baja a media (N = 6–18)."
+    ],
+    [
+      "U-II",
+      1.55,
+      5.1,
+      "Limo color café tipo maicillo (arenoso en su parte superior), humedad natural media a alta (alta entre 2,55 y 3,55 m), plasticidad baja a media y consistencia baja (N = 2–4). Recuperación baja: 51% (2,55–3,10 m), 73% (3,55–4,10 m) y 27% (4,55–5,10 m)."
+    ],
+    [
+      "U-III",
+      5.1,
+      11.1,
+      "Limo color café (grisáceo entre 5,80 y 6,10 m) que pasa a material tipo maicillo desde 8,55 m; humedad natural media (media a alta hasta 6,80 m) y plasticidad baja a nula. Consistencia/compacidad media a alta (N = 8–31)."
+    ],
+    [
+      "U-IV",
+      11.1,
+      13.83,
+      "Material tipo maicillo, humedad natural media y plasticidad baja a nula, con granular tipo cuarzo entre 12,23 y 13,10 m. Compacidad muy alta, con rechazo al SPT a 11,10 y 12,10 m y N3 = 50 a 13,10 m."
+    ],
+    [
+      "U-V",
+      13.83,
+      15.0,
+      "Roca tipo granito, con rechazo al SPT a 14,10 m. Recuperación 100%."
+    ]
+  ],
+  "texto_resumen_tabla": "Predomina material tipo maicillo de color café: maicillo en los primeros 1,55 m, limo tipo maicillo hasta 8,55 m y material tipo maicillo hasta 14,10 m, con humedad natural media a alta y plasticidad baja a nula. Se registran restos de hormigón entre 0,45 y 1,10 m, material grisáceo entre 5,80 y 6,10 m y granular tipo cuarzo entre 12,23 y 13,10 m. Desde 13,83 m se identifica roca tipo granito. La recuperación promedio de los tramos muestreados es de {rec_prom}%.",
+  "observaciones": [
+    "El sondaje S-3 se ejecutó el 30.09.2026 (fecha de registro en ESKUAD), alcanzando una profundidad final de 15,00 m.",
+    "Predomina maicillo de color café en los primeros 1,55 m, limo color café tipo maicillo hasta 8,55 m y material tipo maicillo hasta 14,10 m, con humedad natural media a alta y plasticidad baja a nula; entre 5,80 y 6,10 m el material es de color grisáceo.",
+    "La consistencia es baja (N = 2–4) entre 2,10 y 4,55 m, con humedad natural alta entre 2,55 y 3,55 m; bajo 5,10 m aumenta a media-alta (N = 8–31).",
+    "Se registra rechazo al SPT a 11,10 m, 12,10 m y 14,10 m, y N3 = 50 a 13,10 m (compacidad muy alta). Desde 13,83 m se identifica roca tipo granito, que continúa hasta el término del sondaje.",
+    "La recuperación de muestra presenta un promedio de {rec_prom}%. Las menores recuperaciones se registran entre 2,55 y 3,10 m (51%), 3,55 y 4,10 m (73%), 4,55 y 5,10 m (27%) y 12,23 y 13,10 m (63%); en el resto de los tramos es de 82% a 100%."
+  ]
+}

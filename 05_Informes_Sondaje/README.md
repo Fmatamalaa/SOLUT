@@ -32,3 +32,7 @@ recuadros "FOTO PENDIENTE". Se pueden reemplazar a mano o volver a correr el com
 - Intervalos inconsistentes de digitación se corrigen y se informan al ejecutar (avisos).
 - El índice de la ficha es texto fijo: los números de página son estimados; revisar al abrir en Word.
 - Las URLs de fotos de ESKUAD requieren autenticación; si el token no funciona, descargar las fotos desde ESKUAD.
+
+- Si las fotos exportadas llegan en orden inverso al del registro (caso S-3 Lonco), renombrarlas por número de muestra antes de usar `--fotos`; el pizarrón de cada foto indica la cota.
+- Si el Excel no trae GPS, indicar `"coordenadas"` en el config (o queda `[COMPLETAR]`).
+- Ensayos con rechazo (50 golpes sin completar penetración) se informan como rechazo, sin valor N.
