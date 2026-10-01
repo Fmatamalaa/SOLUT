@@ -437,6 +437,10 @@ def generar_informe(args):
     t1 = tbls[3]
     rows = t1.findall(W + "tr")
     hdr, modelo, modelo_spt = rows[0], rows[1], rows[4]
+    cel_hdr = copy.deepcopy(hdr.findall(W + "tc")[0])
+    cel_num = copy.deepcopy(modelo.findall(W + "tc")[1])
+    cel_txt = copy.deepcopy(modelo.findall(W + "tc")[5])
+    t1_modelo = copy.deepcopy(t1)
     for r in rows[1:]:
         t1.remove(r)
     for m in ms:
@@ -466,6 +470,64 @@ def generar_informe(args):
     set_ptext(find_p(body, "Los tramos recuperados"),
               "Se ejecutaron %d ensayos SPT entre %s y %s m, %s%s. %s%s" % (
                   len(spts), f2(spts[0]["de"]), f2(spts[-1]["hasta"]), txt_n, txt_r, resumen, nota_ri))
+
+    # ---- tabla de registro de ensayos SPT ----
+    set_ptext(find_p(body, "Tabla 2. Agrupación"), "Tabla 3. Agrupación de horizontes en unidad geotécnica.")
+    ancho = [700, 1000, 1000, 700, 700, 700, 800, 3376]
+    heads = ["N°", "Desde (m)", "Hasta (m)", "N1", "N2", "N3", "N", "Observaciones"]
+
+    def obs_spt(m):
+        pen = int(round((m["hasta"] - m["de"]) * 100))
+        if m["rechazo"] and m["n2"] == 0 and m["n3"] == 0:
+            return "Rechazo (%d golpes en %d cm)" % (m["n1"], pen)
+        if m["rechazo"]:
+            return "Rechazo parcial (N3 = %d)" % m["n3"]
+        mo = re.search(r"(compacidad|consistencia) (muy alta|alta|media|baja)( a (?:muy )?(?:alta|media|baja))?",
+                       m["desc"], re.I)
+        return (mo.group(0)[0].upper() + mo.group(0)[1:]) if mo else "-"
+
+    def celda(modelo_cel, w, texto, bold=False):
+        c = copy.deepcopy(modelo_cel)
+        c.find(W + "tcPr").find(W + "tcW").set(W + "w", str(w))
+        set_cell(c, texto)
+        return c
+
+    tb = copy.deepcopy(t1_modelo)
+    for r in tb.findall(W + "tr"):
+        tb.remove(r)
+    grid = tb.find(W + "tblGrid")
+    for g in list(grid):
+        grid.remove(g)
+    for w in ancho:
+        grid.append(grid.makeelement(W + "gridCol", {W + "w": str(w)}))
+    tb.find(W + "tblPr").find(W + "tblW").set(W + "w", str(sum(ancho)))
+    fila_h = copy.deepcopy(hdr)
+    for c in fila_h.findall(W + "tc"):
+        fila_h.remove(c)
+    for w, h in zip(ancho, heads):
+        fila_h.append(celda(cel_hdr, w, h))
+    tb.append(fila_h)
+    for m in spts:
+        fila = copy.deepcopy(modelo)
+        for c in fila.findall(W + "tc"):
+            fila.remove(c)
+        vals = [str(m["n"]), f2(m["de"]), f2(m["hasta"]), str(m["n1"]), str(m["n2"]), str(m["n3"]),
+                ("R*" if m["rechazo"] else str(m["N"])), obs_spt(m)]
+        for i, (w, v) in enumerate(zip(ancho, vals)):
+            fila.append(celda(cel_txt if i == 7 else cel_num, w, v))
+        tb.append(fila)
+    cap2 = copy.deepcopy(find_p(body, "Tabla 1."))
+    set_ptext(cap2, "Tabla 2. Registro de ensayos SPT sondaje %s. N = N2 + N3 (golpes / 15 cm). Fuente: elaboración propia." % sond)
+    ref = find_p(body, "Se ejecutaron")
+    esp = copy.deepcopy(find_p(body, "Se ejecutaron"))
+    set_ptext(esp, "")
+    elementos = [esp, cap2, tb, copy.deepcopy(esp)]
+    if any(m["rechazo"] for m in spts):
+        nota = copy.deepcopy(find_p(body, "Se ejecutaron"))
+        set_ptext(nota, "R*: rechazo, al alcanzarse 50 golpes sin completar la penetración del tramo; no se reporta valor N.")
+        elementos.append(nota)
+    for el in reversed(elementos):
+        ref.addnext(el)
 
     # ---- sección 4: unidades (borrador) ----
     set_ptext(find_p(body, "La agrupación de unidades"),
@@ -510,7 +572,11 @@ def generar_informe(args):
             tit = "5.%d Tramo %s – %s m — Ensayo SPT (%s)" % (k, f2(m["de"]), f2(m["hasta"]), det)
             cap = "Foto %d. Ensayo SPT — tramo %s, %s." % (k, tramo, sc)
         else:
-            tit = "5.%d Tramo %s – %s m (P: %s m)" % (k, f2(m["de"]), f2(m["hasta"]), f2(m["hasta"] - m["de"]))
+            if m["n"] in pct:
+                det = "P: %s m · R: %s m · %%R: %d%%" % (f2(m["hasta"] - m["de"]), f2(rec[m["n"]]), pct[m["n"]])
+            else:
+                det = "P: %s m" % f2(m["hasta"] - m["de"])
+            tit = "5.%d Tramo %s – %s m (%s)" % (k, f2(m["de"]), f2(m["hasta"]), det)
             cap = "Foto %d. Muestra — tramo %s, %s." % (k, tramo, sc)
         h, im, ca = copy.deepcopy(mod_h), copy.deepcopy(mod_img), copy.deepcopy(mod_cap)
         set_ptext(h, tit)
