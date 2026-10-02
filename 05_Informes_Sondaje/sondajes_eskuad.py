@@ -118,11 +118,20 @@ def leer_registro(ruta_excel):
 
 def _normalizar(ms):
     """Define tramo definitivo y SPT de cada muestra, detectando inconsistencias de digitación."""
+    for i in range(1, len(ms)):  # inicio con dígito faltante (p. ej. 2.55 en vez de 22.55)
+        esperado = ms[i - 1]["hasta"]
+        if abs(ms[i]["de"] - esperado) > 1e-6:
+            for add in (10, 20, 30, 40, 50, 100):
+                if abs(ms[i]["de"] + add - esperado) < 1e-6:
+                    ms[i]["avisos"].append("inicio corregido %.2f -> %.2f (dígito faltante)" % (ms[i]["de"], esperado))
+                    ms[i]["de"] = esperado
+                    break
     prev_hasta = 0.0
     for i, m in enumerate(ms):
         m["es_spt"] = (m["n1"] + m["n2"] + m["n3"]) > 0
-        m["rechazo"] = m["es_spt"] and (max(m["n1"], m["n2"], m["n3"]) >= 50
-                                        or m["desc"].lower().startswith("rechazo"))
+        pen_corta = (m["hasta"] - m["de"]) < 0.44  # penetración menor a los 45 cm del ensayo completo
+        m["rechazo"] = m["es_spt"] and ("rechazo" in m["desc"].lower()
+                                        or (max(m["n1"], m["n2"], m["n3"]) >= 50 and pen_corta))
         m["N"] = (m["n2"] + m["n3"]) if (m["es_spt"] and not m["rechazo"]) else None
         sig_de = ms[i + 1]["de"] if i + 1 < len(ms) else None
         cand = [(m["de"], m["hasta"])]
@@ -161,6 +170,8 @@ TIPOS = [  # correcciones ortograficas frecuentes en digitacion de terreno
     (r"\bsi plasticidad", "sin plasticidad"),
     (r"matriz final", "matriz fina"),
     (r"Esxasa muestea", "Escasa muestra"),
+    (r"semingruesa", "semigruesa"),
+    (r"Arena color semigruesa color gris", "Arena semigruesa color gris"),
     (r"\.0$", "."),
     (r"grisaceo", "grisáceo"),
     (r"\s+,", ","),
@@ -486,8 +497,8 @@ def generar_informe(args):
     txt_n = ("con valores de N entre %d y %d" % (min(nums), max(nums))) if nums else "sin valores de N válidos"
     txt_r = ""
     if rech:
-        txt_r = ", y rechazo (50 golpes sin completar la penetración) en %d ensayos a %s m" % (
-            len(rech), ", ".join(f2(m["de"]) for m in rech))
+        txt_r = ", y rechazo (50 golpes sin completar la penetración) en %d ensayo%s a %s m" % (
+            len(rech), "" if len(rech) == 1 else "s", ", ".join(f2(m["de"]) for m in rech))
     set_ptext(find_p(body, "Los tramos recuperados"),
               "Se ejecutaron %d ensayos SPT entre %s y %s m, %s%s. %s%s" % (
                   len(spts), f2(spts[0]["de"]), f2(spts[-1]["hasta"]), txt_n, txt_r, resumen, nota_ri))
@@ -502,7 +513,9 @@ def generar_informe(args):
         if m["rechazo"] and m["n2"] == 0 and m["n3"] == 0:
             return "Rechazo (%d golpes en %d cm)" % (m["n1"], pen)
         if m["rechazo"]:
-            return "Rechazo parcial (N3 = %d)" % m["n3"]
+            vals = [m["n1"], m["n2"], m["n3"]]
+            k = next((i for i, v in enumerate(vals) if v >= 50), max(i for i, v in enumerate(vals) if v > 0))
+            return "Rechazo (N%d = %d; penetración %d cm)" % (k + 1, vals[k], pen)
         mo = re.search(r"(compacidad|consistencia) (muy alta|alta|media|baja)( a (?:muy )?(?:alta|media|baja))?",
                        m["desc"], re.I)
         return (mo.group(0)[0].upper() + mo.group(0)[1:]) if mo else "-"

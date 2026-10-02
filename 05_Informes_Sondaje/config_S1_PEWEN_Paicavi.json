@@ -53,14 +53,20 @@
       17.1,
       22.1,
       "Arena fina a semigruesa gris, con olor entre 18,55 y 19,55 m. Compacidad muy alta (N = 50–72)."
+    ],
+    [
+      "U-VII",
+      22.1,
+      29.1,
+      "Arena semigruesa a fina de color gris, humedad natural media y sin plasticidad; arena gruesa con rechazo parcial al SPT a 27,10 m (50 golpes en 32 cm). Compacidad muy alta (N = 52–91)."
     ]
   ],
-  "texto_resumen_tabla": "Los primeros 0,11 m corresponden a hormigón de radier, seguido de base estabilizada granular hasta 0,42 m. Bajo ese nivel predomina arena fina de color grisáceo, humedad natural media y sin plasticidad aparente, con presencia aislada de restos de ladrillo (0,42–0,80 m y 2,55–3,10 m) y de limo (4,55–5,17 m), y arena muy fina limosa con olor entre 13,55 y 14,10 m. Desde 21,55 m se registra arena semigruesa de color gris. La recuperación promedio de los tramos muestreados es de {rec_prom}%.",
+  "texto_resumen_tabla": "Los primeros 0,11 m corresponden a hormigón de radier, seguido de base estabilizada granular hasta 0,42 m. Bajo ese nivel predomina arena fina de color grisáceo, humedad natural media y sin plasticidad aparente, con presencia aislada de restos de ladrillo (0,42–0,80 m y 2,55–3,10 m) y de limo (4,55–5,17 m), y arena muy fina limosa con olor entre 13,55 y 14,10 m. Desde 21,55 m se registra arena semigruesa de color gris (fina entre 24,55 y 25,55 m y bajo 27,42 m, y gruesa entre 27,10 y 27,42 m). La recuperación promedio de los tramos muestreados con dato es de {rec_prom}%.",
   "observaciones": [
-    "El sondaje S-1 se ejecutó el 28.09.2026 (fecha de registro en ESKUAD), alcanzando una profundidad final de 22,10 m.",
-    "Bajo el pavimento superficial (hormigón de radier y base estabilizada) predomina arena fina de color grisáceo, con humedad natural media y sin plasticidad aparente; en profundidad se registra arena muy fina limosa y, desde 21,55 m, arena semigruesa.",
-    "La compacidad aumenta con la profundidad: baja a media entre 0,80 y 5,10 m, media a alta hasta 12,10 m y alta a muy alta desde 12,10 m, con una disminución local entre 15,10 y 17,10 m.",
-    "La recuperación de muestra presenta un promedio de {rec_prom}%. Las menores recuperaciones se registran entre 14,55 y 16,10 m (73% y 78%) y entre 20,55 y 21,10 m (45%); en el resto de los tramos es de 86% a 100%.",
+    "El sondaje S-1 se ejecutó el 28.09.2026 (fecha de registro en ESKUAD), alcanzando una profundidad final de 29,10 m.",
+    "Bajo el pavimento superficial (hormigón de radier y base estabilizada) predomina arena fina de color grisáceo, con humedad natural media y sin plasticidad aparente; en profundidad se registra arena muy fina limosa y, desde 21,55 m, arena semigruesa gris, con arena fina bajo 27,42 m.",
+    "La compacidad aumenta con la profundidad: baja a media entre 0,80 y 5,10 m, media a alta hasta 12,10 m, alta a muy alta desde 12,10 m con una disminución local entre 15,10 y 17,10 m, y muy alta bajo 17,10 m (N = 50–91). Se registra rechazo parcial al SPT a 27,10 m (50 golpes en 32 cm).",
+    "La recuperación de muestra presenta un promedio de {rec_prom}%. Las menores recuperaciones se registran entre 14,55 y 16,10 m (73% y 78%), entre 20,55 y 21,10 m (45%) y entre 25,55 y 28,10 m (64% a 73%); en el resto de los tramos con dato es de 86% a 100%.",
     "Se observa olor en los tramos 13,55–14,10 m y 18,55–19,55 m (arena fina con olor), condición que se deja consignada para su evaluación posterior."
   ],
   "recuperacion": {
@@ -86,6 +92,11 @@
     "39": 0.55,
     "41": 0.55,
     "43": 0.25,
-    "45": 0.5
-  }
+    "45": 0.5,
+    "53": 0.4,
+    "55": 0.35,
+    "57": 0.49,
+    "59": 0.5
+  },
+  "coordenadas": "N 5924274.18 / E 673998.71"
 }
