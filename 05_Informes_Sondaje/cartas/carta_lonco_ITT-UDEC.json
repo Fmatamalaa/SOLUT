@@ -1,0 +1,51 @@
+{
+  "encabezado": {
+    "revision": "01",
+    "inicio_aplicacion": "24-06-2025",
+    "codigo": "CC-SLAB-01"
+  },
+  "fecha_carta": "02 de octubre del 2026",
+  "numero_carta": "__/26",
+  "destinatario": {
+    "empresa": "ITT UDEC - LABORATORIO DE SUELOS.",
+    "lineas": [
+      "At.: [Nombre del encargado].",
+      "Jefe de Laboratorio."
+    ]
+  },
+  "proyecto": {
+    "nombre": "Edificio Lonco Parque",
+    "ubicacion": "Lonco, camino a Chiguayante, Región del Biobío.",
+    "mandante": "Pangea Ingeniería."
+  },
+  "grupos": [
+    {
+      "muestra": "S-3",
+      "coordenadas": "N: 5.917.243    E: 674.675",
+      "fecha": "30/09 y 01/10/26",
+      "ensayos": "H. Natural-Granulometría-IP-Clasificación -DPS.",
+      "items": [
+        "M-03 Cotas 1,10-1,55m",
+        "M-04 Cotas 1,55-2,10m",
+        "M-08 Cotas 3,55-4,10m",
+        "M-12 Cotas 5,80-6,10m",
+        "M-16 Cotas 7,55-8,10m",
+        "M-22 Cotas 10,55-11,10m",
+        "M-24 Cotas 11,24-12,10m"
+      ]
+    }
+  ],
+  "observaciones": [
+    "Todos los ensayos deberán ser ejecutados según normativa vigente aplicable.",
+    "Informar a la brevedad cualquier tipo de condición que impida la correcta ejecución de los ensayos solicitados.",
+    "Entregar resultados en formato PDF."
+  ],
+  "firma": {
+    "lineas": [
+      "Lito Rodríguez Torres",
+      "Jefe de Laboratorio",
+      "Solut Laboratorio SpA"
+    ],
+    "iniciales": "FMA/LRT"
+  }
+}

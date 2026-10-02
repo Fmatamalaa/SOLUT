@@ -1,0 +1,67 @@
+{
+  "encabezado": {
+    "revision": "01",
+    "inicio_aplicacion": "24-06-2025",
+    "codigo": "CC-SLAB-01"
+  },
+  "fecha_carta": "02 de octubre del 2026",
+  "numero_carta": "__/26",
+  "destinatario": {
+    "empresa": "MSTD INGENIERÍA.",
+    "lineas": [
+      "At.: Sr. Ricardo Briones.",
+      "Jefe de Laboratorio."
+    ]
+  },
+  "proyecto": {
+    "nombre": "Sondajes Planta Nueva Aldea",
+    "ubicacion": "Planta Nueva Aldea, comuna de Ránquil, Región de Ñuble.",
+    "mandante": "Pangea Geotecnia."
+  },
+  "grupos": [
+    {
+      "muestra": "S-1",
+      "coordenadas": "N: 5.939.995    E: 725.740",
+      "fecha": "23 y 24/09/26",
+      "ensayos": "H. Natural-Granulometría-IP-Clasificación -DPS.",
+      "items": [
+        "M-03 Cotas 1,50-2,00m",
+        "M-05 Cotas 2,45-3,00m",
+        "M-09 Cotas 4,70-5,00m",
+        "M-11 Cotas 5,45-6,00m",
+        "M-15 Cotas 7,45-8,00m",
+        "M-17 Cotas 8,45-9,00m",
+        "M-19 Cotas 9,45-10,00m"
+      ]
+    },
+    {
+      "muestra": "S-2",
+      "coordenadas": "N: 5.940.012    E: 725.831",
+      "fecha": "25/09/26",
+      "ensayos": "H. Natural-Granulometría-IP-Clasificación -DPS.",
+      "items": [
+        "M-03 Cotas 1,40-2,00m",
+        "M-05 Cotas 2,45-3,00m",
+        "M-07 Cotas 3,70-4,00m",
+        "M-09 Cotas 4,45-5,00m",
+        "M-11 Cotas 5,45-6,00m",
+        "M-15 Cotas 7,45-8,00m",
+        "M-17 Cotas 8,45-9,00m",
+        "M-19 Cotas 9,45-10,00m"
+      ]
+    }
+  ],
+  "observaciones": [
+    "Todos los ensayos deberán ser ejecutados según normativa vigente aplicable.",
+    "Informar a la brevedad cualquier tipo de condición que impida la correcta ejecución de los ensayos solicitados.",
+    "Entregar resultados en formato PDF."
+  ],
+  "firma": {
+    "lineas": [
+      "Lito Rodríguez Torres",
+      "Jefe de Laboratorio",
+      "Solut Laboratorio SpA"
+    ],
+    "iniciales": "FMA/LRT"
+  }
+}
