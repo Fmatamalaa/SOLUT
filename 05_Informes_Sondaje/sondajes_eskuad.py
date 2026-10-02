@@ -399,8 +399,29 @@ def generar_informe(args):
     # figura 1 (foto del equipo sobre balsa, propia del proyecto anterior)
     fig_cap = find_p(body, "Figura 1.")
     fig_img = fig_cap.getprevious()
-    body.remove(fig_img)
-    body.remove(fig_cap)
+    fotos_inst = cfg.get("fotos_instalacion") or []
+    if fotos_inst:
+        ancla = fig_cap
+        prev = fig_img.getprevious()
+        for k, fi in enumerate(fotos_inst, 1):
+            im_el, cap_el = copy.deepcopy(fig_img), copy.deepcopy(fig_cap)
+            rid_i, _ = doc.part.get_or_add_image(fi["archivo"])
+            im_el.find(".//{http://schemas.openxmlformats.org/drawingml/2006/main}blip").set("{%s}embed" % R_NS, rid_i)
+            for dp in im_el.iter("{http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing}docPr"):
+                dp.set("id", str(3200000 + k))
+                dp.set("name", "instalacion_%d.jpg" % k)
+            for cn in im_el.iter("{http://schemas.openxmlformats.org/drawingml/2006/picture}cNvPr"):
+                cn.set("name", "instalacion_%d.jpg" % k)
+            set_ptext(cap_el, "Figura %d. %s" % (k, fi["pie"]))
+            keep_next(im_el)
+            ancla.addnext(im_el)
+            im_el.addnext(cap_el)
+            ancla = cap_el
+        body.remove(fig_img)
+        body.remove(fig_cap)
+    else:
+        body.remove(fig_img)
+        body.remove(fig_cap)
 
     # ---- sección 2 ----
     set_ptext(find_p(body, "El sondaje S-2 se emplaza"),
