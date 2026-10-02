@@ -98,7 +98,10 @@
     "55": 0.35,
     "57": 0.49,
     "59": 0.5,
-    "61": 0.45
+    "61": 0.45,
+    "47": 0.4,
+    "49": 0.4,
+    "51": 0.35
   },
   "coordenadas": "N 5924274.18 / E 673998.71",
   "muestras_extra": [
@@ -106,8 +109,10 @@
       "rep": 60,
       "de": 29.1,
       "hasta": 29.55,
-      "pendiente": true,
-      "desc": ""
+      "n1": 16,
+      "n2": 43,
+      "n3": 50,
+      "desc": "Arena fina color gris, humedad natural media, sin plasticidad."
     },
     {
       "rep": 61,
