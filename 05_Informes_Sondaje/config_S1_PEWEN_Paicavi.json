@@ -10,10 +10,10 @@
   "metodo": "Sondaje con recuperación de muestras y ensayo SPT",
   "sistema": "HQ",
   "huso": 18,
-  "fechas": "28.09.2026",
+  "fechas": "28.09.2026 al 02.10.2026",
   "codigo": "SOL-LT-S1-2026",
   "revision": "0",
-  "fecha_revision": "30.09.2026",
+  "fecha_revision": "02.10.2026",
   "elaboro": "Dpto. Geotecnia SOLUT",
   "reviso": "F. Matamala A.",
   "aprobo": "F. Matamala A.",
@@ -57,17 +57,18 @@
     [
       "U-VII",
       22.1,
-      29.1,
+      30.0,
       "Arena semigruesa a fina de color gris, humedad natural media y sin plasticidad; arena gruesa con rechazo parcial al SPT a 27,10 m (50 golpes en 32 cm). Compacidad muy alta (N = 52–91)."
     ]
   ],
   "texto_resumen_tabla": "Los primeros 0,11 m corresponden a hormigón de radier, seguido de base estabilizada granular hasta 0,42 m. Bajo ese nivel predomina arena fina de color grisáceo, humedad natural media y sin plasticidad aparente, con presencia aislada de restos de ladrillo (0,42–0,80 m y 2,55–3,10 m) y de limo (4,55–5,17 m), y arena muy fina limosa con olor entre 13,55 y 14,10 m. Desde 21,55 m se registra arena semigruesa de color gris (fina entre 24,55 y 25,55 m y bajo 27,42 m, y gruesa entre 27,10 y 27,42 m). La recuperación promedio de los tramos muestreados con dato es de {rec_prom}%.",
   "observaciones": [
-    "El sondaje S-1 se ejecutó el 28.09.2026 (fecha de registro en ESKUAD), alcanzando una profundidad final de 29,10 m.",
+    "El sondaje S-1 se ejecutó entre el 28.09.2026 y el 02.10.2026, alcanzando una profundidad final de 30,00 m.",
     "Bajo el pavimento superficial (hormigón de radier y base estabilizada) predomina arena fina de color grisáceo, con humedad natural media y sin plasticidad aparente; en profundidad se registra arena muy fina limosa y, desde 21,55 m, arena semigruesa gris, con arena fina bajo 27,42 m.",
     "La compacidad aumenta con la profundidad: baja a media entre 0,80 y 5,10 m, media a alta hasta 12,10 m, alta a muy alta desde 12,10 m con una disminución local entre 15,10 y 17,10 m, y muy alta bajo 17,10 m (N = 50–91). Se registra rechazo parcial al SPT a 27,10 m (50 golpes en 32 cm).",
     "La recuperación de muestra presenta un promedio de {rec_prom}%. Las menores recuperaciones se registran entre 14,55 y 16,10 m (73% y 78%), entre 20,55 y 21,10 m (45%) y entre 25,55 y 28,10 m (64% a 73%); en el resto de los tramos con dato es de 86% a 100%.",
-    "Se observa olor en los tramos 13,55–14,10 m y 18,55–19,55 m (arena fina con olor), condición que se deja consignada para su evaluación posterior."
+    "Se observa olor en los tramos 13,55–14,10 m y 18,55–19,55 m (arena fina con olor), condición que se deja consignada para su evaluación posterior.",
+    "Las mediciones del nivel de agua al interior de la perforación registraron 4,15 m (01.10.2026, tarde), 5,23 m (inicio del sondaje, 02.10.2026) y 6,45 m al término del sondaje; por la variación entre mediciones, no se establece un nivel freático estabilizado."
   ],
   "recuperacion": {
     "1": 0.3,
@@ -96,7 +97,84 @@
     "53": 0.4,
     "55": 0.35,
     "57": 0.49,
-    "59": 0.5
+    "59": 0.5,
+    "61": 0.45
   },
-  "coordenadas": "N 5924274.18 / E 673998.71"
+  "coordenadas": "N 5924274.18 / E 673998.71",
+  "muestras_extra": [
+    {
+      "rep": 60,
+      "de": 29.1,
+      "hasta": 29.55,
+      "pendiente": true,
+      "desc": ""
+    },
+    {
+      "rep": 61,
+      "de": 29.55,
+      "hasta": 30.0,
+      "desc": "Arena fina color gris, humedad natural media, sin plasticidad."
+    }
+  ],
+  "nivel_freatico": {
+    "intro": "Durante la ejecución del sondaje S-1 se realizaron mediciones del nivel de agua al interior de la perforación, con el objeto de registrar su variación durante el avance. Los valores obtenidos, medidos desde la superficie del terreno, se presentan en la Tabla 1.",
+    "mediciones": [
+      [
+        "01.10.2026",
+        "Tarde",
+        "4,15 m"
+      ],
+      [
+        "02.10.2026",
+        "Inicio del sondaje",
+        "5,23 m"
+      ],
+      [
+        "02.10.2026",
+        "Término del sondaje",
+        "6,45 m"
+      ]
+    ],
+    "nota": "El nivel de agua medido al interior de la perforación pasó de 4,15 m a 6,45 m de profundidad entre el 01.10.2026 y el término del sondaje. Estas mediciones se efectuaron durante la ejecución de la perforación, por lo que no establecen un nivel freático estabilizado."
+  },
+  "fotos_instalacion": [
+    {
+      "archivo": "/tmp/claude-0/-home-user-SOLUT/39b5970f-cb4b-5c4c-967f-0b3581954cc1/scratchpad/ebco3/prep/inst_2902.jpg",
+      "pie": "Instalación del equipo de perforación en el punto del sondaje S-1."
+    },
+    {
+      "archivo": "/tmp/claude-0/-home-user-SOLUT/39b5970f-cb4b-5c4c-967f-0b3581954cc1/scratchpad/ebco3/prep/inst_2903.jpg",
+      "pie": "Equipo de sondaje y área de trabajo, S-1."
+    },
+    {
+      "archivo": "/tmp/claude-0/-home-user-SOLUT/39b5970f-cb4b-5c4c-967f-0b3581954cc1/scratchpad/ebco3/prep/inst_2904.jpg",
+      "pie": "Vista general del equipo de perforación, S-1."
+    }
+  ],
+  "cajas": [
+    {
+      "archivo": "/tmp/claude-0/-home-user-SOLUT/39b5970f-cb4b-5c4c-967f-0b3581954cc1/scratchpad/ebco3/prep/caja_2911.jpg",
+      "pie": "Caja 1 – 0,00 a 5,55 m"
+    },
+    {
+      "archivo": "/tmp/claude-0/-home-user-SOLUT/39b5970f-cb4b-5c4c-967f-0b3581954cc1/scratchpad/ebco3/prep/caja_2910.jpg",
+      "pie": "Caja 2 – 5,55 a 10,55 m"
+    },
+    {
+      "archivo": "/tmp/claude-0/-home-user-SOLUT/39b5970f-cb4b-5c4c-967f-0b3581954cc1/scratchpad/ebco3/prep/caja_2908.jpg",
+      "pie": "Caja 3 – 10,88 a 16,55 m"
+    },
+    {
+      "archivo": "/tmp/claude-0/-home-user-SOLUT/39b5970f-cb4b-5c4c-967f-0b3581954cc1/scratchpad/ebco3/prep/caja_2907.jpg",
+      "pie": "Caja 4 – 16,55 a 21,55 m"
+    },
+    {
+      "archivo": "/tmp/claude-0/-home-user-SOLUT/39b5970f-cb4b-5c4c-967f-0b3581954cc1/scratchpad/ebco3/prep/caja_2906.jpg",
+      "pie": "Caja 5 – 22,10 a 28,10 m"
+    },
+    {
+      "archivo": "/tmp/claude-0/-home-user-SOLUT/39b5970f-cb4b-5c4c-967f-0b3581954cc1/scratchpad/ebco3/prep/caja_2905.jpg",
+      "pie": "Caja 6 – 28,55 a 30,00 m"
+    }
+  ]
 }

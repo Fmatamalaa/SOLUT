@@ -66,7 +66,7 @@ def _num(v):
         return 0.0
 
 
-def leer_registro(ruta_excel):
+def leer_registro(ruta_excel, extras=None):
     """Devuelve (meta, muestras). Cada muestra es un dict con:
     n, de, hasta, spt (None | dict(n1,n2,n3,N)), desc, foto_url, avisos."""
     import warnings
@@ -112,6 +112,13 @@ def leer_registro(ruta_excel):
             "foto_url": c[11][2],
             "avisos": [],
         })
+    for e in (extras or []):  # repeticiones aún no exportadas en el Excel (se indican en el config)
+        muestras.append({
+            "rep": e["rep"], "de": float(e["de"]), "hasta": float(e["hasta"]), "n": e["rep"],
+            "spt_de": 0.0, "spt_a": 0.0, "n1": int(e.get("n1", 0)), "n2": int(e.get("n2", 0)),
+            "n3": int(e.get("n3", 0)), "desc": e.get("desc", ""), "foto_url": None,
+            "avisos": ["agregada desde el config (no está en el Excel)"],
+            "pendiente": bool(e.get("pendiente"))})
     _normalizar(muestras)
     return meta, muestras
 
@@ -128,9 +135,9 @@ def _normalizar(ms):
                     break
     prev_hasta = 0.0
     for i, m in enumerate(ms):
-        m["es_spt"] = (m["n1"] + m["n2"] + m["n3"]) > 0
+        m["es_spt"] = (m["n1"] + m["n2"] + m["n3"]) > 0 or m.get("pendiente", False)
         pen_corta = (m["hasta"] - m["de"]) < 0.44  # penetración menor a los 45 cm del ensayo completo
-        m["rechazo"] = m["es_spt"] and ("rechazo" in m["desc"].lower()
+        m["rechazo"] = m["es_spt"] and not m.get("pendiente") and ("rechazo" in m["desc"].lower()
                                         or (max(m["n1"], m["n2"], m["n3"]) >= 50 and pen_corta))
         m["N"] = (m["n2"] + m["n3"]) if (m["es_spt"] and not m["rechazo"]) else None
         sig_de = ms[i + 1]["de"] if i + 1 < len(ms) else None
@@ -336,13 +343,14 @@ def preparar_imagen(ruta_origen, n, etiqueta, destino):
 # --------------------------------------------------------------------------
 def generar_informe(args):
     from docx import Document
-    meta_xl, ms = leer_registro(args.excel)
     cfg = json.load(open(args.config, encoding="utf8"))
+    meta_xl, ms = leer_registro(args.excel, cfg.get("muestras_extra"))
     if not ms:
         raise SystemExit("El Excel no trae muestras.")
 
     prof = ms[-1]["hasta"]
-    spts = [m for m in ms if m["es_spt"]]
+    spts = [m for m in ms if m["es_spt"] and not m.get("pendiente")]
+    spts_tabla = [m for m in ms if m["es_spt"]]
     # coordenadas
     coord = cfg.get("coordenadas")
     if not coord and meta_xl.get("ubicacion_gps"):
@@ -423,6 +431,15 @@ def generar_informe(args):
                 dp.set("name", "instalacion_%d.jpg" % k)
             for cn in im_el.iter("{http://schemas.openxmlformats.org/drawingml/2006/picture}cNvPr"):
                 cn.set("name", "instalacion_%d.jpg" % k)
+            from PIL import Image as _Im
+            with _Im.open(fi["archivo"]) as _f:
+                iw, ih = _f.size
+            if iw > ih:  # apaisada: 13,5 cm de ancho
+                cx, cy = 4860000, int(4860000 * ih / iw)
+                for e in im_el.iter("{http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing}extent",
+                                    "{http://schemas.openxmlformats.org/drawingml/2006/main}ext"):
+                    e.set("cx", str(cx))
+                    e.set("cy", str(cy))
             set_ptext(cap_el, "Figura %d. %s" % (k, fi["pie"]))
             keep_next(im_el)
             ancla.addnext(im_el)
@@ -484,7 +501,7 @@ def generar_informe(args):
                 "-" if m["es_spt"] else f2(p_len),
                 "-" if m["es_spt"] else (f2(rec[m["n"]]) if m["n"] in rec else "s/i"),
                 "SPT" if m["es_spt"] else (("%d%%" % pct[m["n"]]) if m["n"] in pct else "s/i"),
-                limpiar_desc(m["desc"])]
+                (m["desc"] or "[COMPLETAR – registro SPT pendiente en ESKUAD]") if m.get("pendiente") else limpiar_desc(m["desc"])]
         for tc, v in zip(tcs, vals):
             set_cell(tc, v)
         t1.append(tr)
@@ -541,12 +558,16 @@ def generar_informe(args):
     for w, h in zip(ancho, heads):
         fila_h.append(celda(cel_hdr, w, h))
     tb.append(fila_h)
-    for m in spts:
+    for m in spts_tabla:
         fila = copy.deepcopy(modelo)
         for c in fila.findall(W + "tc"):
             fila.remove(c)
-        vals = [str(m["n"]), f2(m["de"]), f2(m["hasta"]), str(m["n1"]), str(m["n2"]), str(m["n3"]),
-                ("R*" if m["rechazo"] else str(m["N"])), obs_spt(m)]
+        if m.get("pendiente"):
+            vals = [str(m["n"]), f2(m["de"]), f2(m["hasta"]), "s/i", "s/i", "s/i", "s/i",
+                    "Registro pendiente en ESKUAD"]
+        else:
+            vals = [str(m["n"]), f2(m["de"]), f2(m["hasta"]), str(m["n1"]), str(m["n2"]), str(m["n3"]),
+                    ("R*" if m["rechazo"] else str(m["N"])), obs_spt(m)]
         for i, (w, v) in enumerate(zip(ancho, vals)):
             fila.append(celda(cel_txt if i == 7 else cel_num, w, v))
         tb.append(fila)
@@ -587,6 +608,8 @@ def generar_informe(args):
     mod_h = copy.deepcopy(primer_h2)
     mod_img = copy.deepcopy(primer_h2.getnext())
     mod_cap = copy.deepcopy(primer_h2.getnext().getnext())
+    h_caja_modelo = copy.deepcopy(h_caja)
+    caja_tbl_modelo = copy.deepcopy(h_caja.getnext())
     # eliminar bloques fotográficos de la plantilla y la sección "Caja de muestras" (sin datos en ESKUAD)
     drop_between(body, primer_h2, h6)
 
@@ -595,7 +618,10 @@ def generar_informe(args):
     faltan = []
     for k, m in enumerate(ms, 1):
         tramo = "%s a %s m" % (f2(m["de"]), f2(m["hasta"]))
-        if m["es_spt"]:
+        if m.get("pendiente"):
+            tit = "5.%d Tramo %s – %s m — Ensayo SPT (registro pendiente)" % (k, f2(m["de"]), f2(m["hasta"]))
+            cap = "Foto %d. Ensayo SPT — tramo %s, %s." % (k, tramo, sc)
+        elif m["es_spt"]:
             pen_cm = int(round((m["hasta"] - m["de"]) * 100))
             if m["rechazo"] and m["n2"] == 0 and m["n3"] == 0:
                 det = "Rechazo · N1: %d golpes en %d cm" % (m["n1"], pen_cm)
@@ -637,28 +663,141 @@ def generar_informe(args):
         for el in (h, im, ca):
             h6.addprevious(el)
 
+    # ---- cajas de muestras ----
+    cajas = cfg.get("cajas") or []
+    WP = "http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing"
+    AN = "http://schemas.openxmlformats.org/drawingml/2006/main"
+    if cajas:
+        hc = copy.deepcopy(h_caja_modelo)
+        set_ptext(hc, "5.%d Caja de muestras" % (len(ms) + 1))
+        keep_next(hc)
+        h6.addprevious(hc)
+        for i0 in range(0, len(cajas), 2):
+            grupo = cajas[i0:i0 + 2]
+            tb = copy.deepcopy(caja_tbl_modelo)
+            inlines = list(tb.iter("{%s}inline" % WP))
+            filas_c = tb.findall(W + "tr")
+            for j, inl in enumerate(inlines):
+                if j < len(grupo):
+                    rid_c, _ = doc.part.get_or_add_image(grupo[j]["archivo"])
+                    inl.find(".//{%s}blip" % AN).set("{%s}embed" % R_NS, rid_c)
+                    for sr in inl.iter("{%s}srcRect" % AN):
+                        for a in list(sr.attrib):
+                            del sr.attrib[a]
+                    for xf in inl.iter("{%s}xfrm" % AN):
+                        if "rot" in xf.attrib:
+                            del xf.attrib["rot"]
+                    docpr_id += 1
+                    for dp in inl.iter("{%s}docPr" % WP):
+                        dp.set("id", str(docpr_id))
+                        dp.set("name", "caja_%d.jpg" % (i0 + j + 1))
+                    for cn in inl.iter("{http://schemas.openxmlformats.org/drawingml/2006/picture}cNvPr"):
+                        cn.set("name", "caja_%d.jpg" % (i0 + j + 1))
+                else:
+                    r_el = inl.getparent().getparent()
+                    r_el.getparent().remove(r_el)
+            for j, tc in enumerate(filas_c[1].findall(W + "tc")):
+                set_cell(tc, grupo[j]["pie"] if j < len(grupo) else "")
+            h6.addprevious(tb)
+            h6.addprevious(h6.makeelement(W + "p", {}))
+
     # ---- sección 6 ----
     obs = [o.replace("{rec_prom}", rec_prom or "s/i") for o in (cfg.get("observaciones") or [])]
     obs_ps = [p for p in body.iter(W + "p") if p.find(W + "pPr") is not None
               and p.find(W + "pPr").find(W + "numPr") is not None]
+    while len(obs_ps) < len(obs):
+        nuevo = copy.deepcopy(obs_ps[-1])
+        obs_ps[-1].addnext(nuevo)
+        obs_ps.append(nuevo)
     for p, txt in zip(obs_ps, obs):
         set_ptext(p, txt)
     for p in obs_ps[len(obs):]:
         p.getparent().remove(p)
 
+    # ---- nivel freático (sección 3) y renumeración de secciones ----
+    nf = cfg.get("nivel_freatico")
+    if nf:
+        def renum(prefijo_viejo, prefijo_nuevo):
+            for p in body.iter(W + "p"):
+                tx = ptext(p)
+                if tx.startswith(prefijo_viejo):
+                    set_ptext(p, prefijo_nuevo + tx[len(prefijo_viejo):])
+                    return True
+            return False
+        # títulos de tablas (de mayor a menor para no pisar)
+        renum("Tabla 3. Agrupación", "Tabla 4. Agrupación")
+        renum("Tabla 2. Registro de ensayos", "Tabla 3. Registro de ensayos")
+        renum("Tabla 1. Registro de sondaje", "Tabla 2. Registro de sondaje")
+        # títulos de sección
+        renum("6. Observaciones", "7. Observaciones")
+        for p in list(body.iter(W + "p")):
+            tx = ptext(p)
+            if re.match(r"^5\.\d+ ", tx):
+                set_ptext(p, "6." + tx[2:])
+        renum("5. Registro fotográfico", "6. Registro fotográfico")
+        renum("4. Síntesis", "5. Síntesis")
+        renum("3. Registro de sondaje", "4. Registro de sondaje")
+        h4 = find_p(body, "4. Registro de sondaje")
+        hnf = copy.deepcopy(h4)
+        set_ptext(hnf, "3. Nivel freático")
+        intro = copy.deepcopy(find_p(body, "A continuación, se presenta"))
+        set_ptext(intro, nf["intro"])
+        cap_nf = copy.deepcopy(find_p(body, "Tabla 2. Registro de sondaje"))
+        set_ptext(cap_nf, "Tabla 1. Registro del nivel freático sondaje %s. Fuente: elaboración propia." % sond)
+        tnf = copy.deepcopy(t2)
+        filas_nf = tnf.findall(W + "tr")
+        for r in filas_nf[2:]:
+            tnf.remove(r)
+        for tc, v in zip(filas_nf[0].findall(W + "tc"), ["Fecha", "Medición", "Profundidad del nivel de agua (m)"]):
+            set_cell(tc, v)
+        modelo_nf = filas_nf[1]
+        tnf.remove(modelo_nf)
+        for fecha, mom, prof_n in nf["mediciones"]:
+            tr = copy.deepcopy(modelo_nf)
+            for tc, v in zip(tr.findall(W + "tc"), [fecha, mom, prof_n]):
+                set_cell(tc, v)
+            tnf.append(tr)
+        espacio = copy.deepcopy(find_p(body, "Se ejecutaron"))
+        set_ptext(espacio, "")
+        nota_nf = copy.deepcopy(find_p(body, "A continuación, se presenta"))
+        set_ptext(nota_nf, nf["nota"])
+        for el in (hnf, intro, copy.deepcopy(espacio), cap_nf, tnf, copy.deepcopy(espacio), nota_nf):
+            h4.addprevious(el)
+
     # ---- índice (estático en la ficha): se actualizan los números de página estimados ----
+    n_tabla = len(ms)
     paginas = cfg.get("paginas_indice")
     if not paginas:
-        n_tabla = len(ms)
-        p_fotos = 3 + 1 + math.ceil(max(n_tabla - 14, 0) / 22.0) + 2   # tabla 1 ocupa ~1 pág cada 22 filas
-        paginas = [3, 4, 4, 3 + 1 + math.ceil(max(n_tabla - 14, 0) / 22.0), p_fotos,
-                   p_fotos + math.ceil((len(ms) - 2) / 2.0)]
-    for pref, num in zip(("1.   ", "2.   ", "3.   ", "4.   ", "5.   ", "6.   "), paginas):
-        for p in body.iter(W + "p"):
-            if ptext(p).startswith(pref) and p.find(W + "pPr") is not None and \
-                    p.find(W + "pPr").find(W + "tabs") is not None:
-                ts = list(p.iter(W + "t"))
-                ts[-1].text = str(num)
+        cm_reg = 3 + n_tabla * 0.95 + 1.5 + len(spts) * 0.6 + 3
+        sintesis = 4 + int((5 + cm_reg) // 22.7)
+        fotos = sintesis + 2
+        fin_fotos = fotos + math.ceil((n_tabla - 2) / 2.0)
+        if cajas:
+            fin_fotos = fotos + math.ceil(n_tabla / 2.0) + math.ceil(len(cajas) / 2.0)
+        if nf:
+            paginas = [3, 4, 4, 4, sintesis, fotos, fin_fotos]
+        else:
+            p_fotos = 3 + 1 + math.ceil(max(n_tabla - 14, 0) / 22.0) + 2
+            paginas = [3, 4, 4, 3 + 1 + math.ceil(max(n_tabla - 14, 0) / 22.0), p_fotos,
+                       p_fotos + math.ceil((n_tabla - 2) / 2.0)]
+    def entradas_indice():
+        return [p for p in body.iter(W + "p") if p.find(W + "pPr") is not None
+                and p.find(W + "pPr").find(W + "tabs") is not None
+                and re.match(r"^\d\.   ", ptext(p))]
+    if nf:
+        ent = entradas_indice()
+        e3 = ent[2]
+        for p in reversed(ent[2:]):  # 3->4, 4->5, 5->6, 6->7
+            ts = list(p.iter(W + "t"))
+            ts[0].text = "%d.   " % (int(ts[0].text[0]) + 1)
+        nuevo = copy.deepcopy(e3)
+        nts = list(nuevo.iter(W + "t"))
+        nts[0].text = "3.   "
+        nts[1].text = "Nivel freático"
+        ent[2].addprevious(nuevo)
+    for p, num in zip(entradas_indice(), paginas):
+        ts = list(p.iter(W + "t"))
+        ts[-1].text = str(num)
 
     # ---- limpieza de imágenes huérfanas y metadatos ----
     xml = doc.element.xml
