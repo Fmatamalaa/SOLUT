@@ -1,0 +1,107 @@
+{
+  "mandante": "PEWEN Geotecnia",
+  "cliente": "PEWEN Geotecnia",
+  "proyecto": "Edificio Ebco",
+  "localidad": "Concepción",
+  "ubicacion": "Av. Paicaví / Vicuña Mackenna, Concepción",
+  "linea_portada": "PEWEN GEOTECNIA — Edificio Ebco, Av. Paicaví / Vicuña Mackenna, Región del Biobío",
+  "sondaje": "S-2",
+  "sondaje_corto": "S-2",
+  "metodo": "Sondaje con recuperación de muestras y ensayo SPT",
+  "sistema": "HQ",
+  "huso": 18,
+  "fechas": "02.10.2026 al 04.10.2026",
+  "codigo": "SOL-LT-S2-2026",
+  "revision": "0",
+  "fecha_revision": "04.10.2026",
+  "elaboro": "Dpto. Geotecnia SOLUT",
+  "reviso": "F. Matamala A.",
+  "aprobo": "F. Matamala A.",
+  "unidades": [
+    [
+      "U-I",
+      0.0,
+      0.75,
+      "Hormigón (0,00–0,30 m) sobre limo arenoso color café con material granular de tamaño máximo 1\", humedad natural media, consistencia baja y plasticidad aparente nula. Compacidad media (N = 13)."
+    ],
+    [
+      "U-II",
+      0.75,
+      8.0,
+      "Arena fina color gris hasta 1,75 m y café bajo ese nivel, humedad natural media y sin plasticidad. Compacidad baja a media (N = 12–19) hasta 5,00 m, alta entre 5,55 y 6,00 m (N = 27) y media hasta 8,00 m (N = 24)."
+    ],
+    [
+      "U-III",
+      8.0,
+      10.0,
+      "Arena fina limosa color café, humedad natural media y plasticidad aparente nula. Compacidad media (N = 20–21)."
+    ],
+    [
+      "U-IV",
+      10.0,
+      12.0,
+      "Arena fina color café, humedad natural media y sin plasticidad. Compacidad media (N = 22–23)."
+    ],
+    [
+      "U-V",
+      12.0,
+      15.0,
+      "Arena muy fina limosa color café hasta 13,00 m y gris bajo ese nivel, humedad natural media y sin plasticidad. Compacidad compacta (N = 42–74)."
+    ]
+  ],
+  "texto_resumen_tabla": "Los primeros 0,30 m corresponden a hormigón, seguido de limo arenoso café con material granular hasta 0,75 m. Bajo ese nivel predomina arena fina de color gris (hasta 1,75 m) y café, de humedad natural media y sin plasticidad aparente, que pasa a arena fina limosa entre 8,00 y 10,00 m y, desde 12,00 m, a arena muy fina limosa café y luego gris (bajo 13,00 m). La recuperación promedio de los tramos muestreados con dato es de {rec_prom}%.",
+  "observaciones": [
+    "El sondaje S-2 se ejecutó entre el 02.10.2026 y el 04.10.2026, alcanzando una profundidad final de 15,00 m.",
+    "Bajo el hormigón superficial y un limo arenoso con material granular predomina arena fina de color gris a café, con humedad natural media y sin plasticidad aparente; entre 8,00 y 10,00 m se registra arena fina limosa y, desde 12,00 m, arena muy fina limosa que cambia de café a gris bajo 13,00 m.",
+    "La compacidad es baja a media entre 0,75 y 5,00 m (N = 12–19), media a alta hasta 12,00 m (N = 16–27) y compacta bajo 12,55 m (N = 42–74).",
+    "La recuperación de muestra presenta un promedio de {rec_prom}%, con valores mínimos de 73% (tramos 3,00–3,55 m, 6,00–6,55 m y 8,00–8,55 m).",
+    "Una vez finalizado el sondaje se instaló tubería PVC en el punto S-2. Las coordenadas informadas corresponden a la lectura GPS registrada en terreno junto a la boca del sondaje (UTM huso 18, WGS84).",
+    "Las cotas, la clasificación y las descripciones corresponden al registro de terreno y son de carácter preliminar, sujetas a verificación con los ensayos de laboratorio."
+  ],
+  "recuperacion": {
+    "1": 0.3,
+    "3": 0.5,
+    "5": 0.76,
+    "7": 0.4,
+    "9": 0.55,
+    "11": 0.55,
+    "13": 0.4,
+    "15": 0.5,
+    "17": 0.4,
+    "19": 0.52,
+    "21": 0.55,
+    "23": 0.55,
+    "25": 0.55,
+    "27": 0.5,
+    "29": 0.5
+  },
+  "coordenadas": "N 5924259.00 / E 674036.32",
+  "fotos_instalacion": [
+    {
+      "archivo": "/tmp/claude-0/-home-user-SOLUT/39b5970f-cb4b-5c4c-967f-0b3581954cc1/scratchpad/s2prep/inst_equipo.jpg",
+      "pie": "Equipo de perforación instalado en el punto del sondaje S-2."
+    },
+    {
+      "archivo": "/tmp/claude-0/-home-user-SOLUT/39b5970f-cb4b-5c4c-967f-0b3581954cc1/scratchpad/s2prep/inst_pvc_utm.jpg",
+      "pie": "Tubería PVC instalada en el sondaje S-2, con lectura GPS (UTM) de la ubicación."
+    },
+    {
+      "archivo": "/tmp/claude-0/-home-user-SOLUT/39b5970f-cb4b-5c4c-967f-0b3581954cc1/scratchpad/s2prep/inst_pvc.jpg",
+      "pie": "Tubería PVC y gravilla en el collar del sondaje S-2."
+    }
+  ],
+  "cajas": [
+    {
+      "archivo": "/tmp/claude-0/-home-user-SOLUT/39b5970f-cb4b-5c4c-967f-0b3581954cc1/scratchpad/s2prep/caja_1.jpg",
+      "pie": "Caja 1 – 0,00 a 5,55 m"
+    },
+    {
+      "archivo": "/tmp/claude-0/-home-user-SOLUT/39b5970f-cb4b-5c4c-967f-0b3581954cc1/scratchpad/s2prep/caja_2.jpg",
+      "pie": "Caja 2 – 5,55 a 11,55 m"
+    },
+    {
+      "archivo": "/tmp/claude-0/-home-user-SOLUT/39b5970f-cb4b-5c4c-967f-0b3581954cc1/scratchpad/s2prep/caja_3.jpg",
+      "pie": "Caja 3 – 11,55 a 15,00 m"
+    }
+  ]
+}

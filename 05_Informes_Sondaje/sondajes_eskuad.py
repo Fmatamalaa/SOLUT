@@ -194,6 +194,7 @@ def limpiar_desc(t):
     for pat, rep in TIPOS:
         t = re.sub(pat, rep, t)
     t = re.sub(r",(?=\S)", ", ", t)
+    t = t.replace("madia", "media")
     if t:
         t = t[0].upper() + t[1:]
     if t and t[-1] not in ".":
