@@ -103,6 +103,8 @@ def leer_registro(ruta_excel, extras=None):
         if nombres != esperado:
             raise SystemExit("Repetición %d del Excel con campos inesperados: %s" % (n, nombres))
         v = [x[1] for x in c]
+        if _num(v[1]) == 0 and not (v[10] or "").strip() and not any(_num(v[i]) for i in (5, 6, 7)):
+            continue  # repetición vacía (iniciada pero sin datos)
         muestras.append({
             "rep": n,
             "de": _num(v[0]), "hasta": _num(v[1]), "n": n,

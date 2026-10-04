@@ -1,0 +1,53 @@
+{
+  "mandante": "[COMPLETAR]",
+  "cliente": "[COMPLETAR]",
+  "proyecto": "[COMPLETAR PROYECTO]",
+  "localidad": "[COMPLETAR]",
+  "ubicacion": "[COMPLETAR] (GPS -37.48915, -72.33513)",
+  "linea_portada": "[COMPLETAR MANDANTE — PROYECTO, LOCALIDAD]",
+  "sondaje": "S-[COMPLETAR]",
+  "sondaje_corto": "S-[N]",
+  "metodo": "Sondaje con recuperación de muestras y ensayo SPT",
+  "sistema": "HQ",
+  "huso": 18,
+  "coordenadas": "N 5847526.32 / E 735604.63",
+  "fechas": "02.10.2026",
+  "codigo": "SOL-LT-S[N]-2026",
+  "revision": "0",
+  "fecha_revision": "02.10.2026",
+  "elaboro": "Dpto. Geotecnia SOLUT",
+  "reviso": "F. Matamala A.",
+  "aprobo": "F. Matamala A.",
+  "unidades": [
+    [
+      "U-I",
+      0.0,
+      0.75,
+      "Hormigón (0,00–0,30 m) sobre limo arenoso color café con material granular de tamaño máximo 1\". Compacidad media (N = 13)."
+    ],
+    [
+      "U-II",
+      0.75,
+      8.0,
+      "Arena fina color gris a café, humedad natural media y sin plasticidad. Compacidad baja a media (N = 12–27)."
+    ],
+    [
+      "U-III",
+      8.0,
+      10.55,
+      "Arena fina limosa color café, humedad natural media y plasticidad aparente baja. Compacidad media (N = 20–21)."
+    ],
+    [
+      "U-IV",
+      10.55,
+      12.55,
+      "Arena fina color café, humedad natural media y sin plasticidad. Compacidad media (N = 22–23)."
+    ],
+    [
+      "U-V",
+      12.55,
+      14.0,
+      "Arena muy fina limosa color café a gris, humedad natural media y sin plasticidad. Compacidad compacta (N = 42–74)."
+    ]
+  ]
+}
