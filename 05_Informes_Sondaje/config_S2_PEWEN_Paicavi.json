@@ -55,7 +55,7 @@
     "Bajo el hormigón superficial y un limo arenoso con material granular predomina arena fina de color gris a café, con humedad natural media y sin plasticidad aparente; entre 8,00 y 10,00 m se registra arena fina limosa y, desde 12,00 m, arena muy fina limosa que cambia de café a gris bajo 13,00 m.",
     "La compacidad es baja a media entre 0,75 y 5,00 m (N = 12–19), media a alta hasta 12,00 m (N = 16–27) y compacta bajo 12,55 m (N = 42–74).",
     "La recuperación de muestra presenta un promedio de {rec_prom}%, con valores mínimos de 73% (tramos 3,00–3,55 m, 6,00–6,55 m y 8,00–8,55 m).",
-    "Una vez finalizado el sondaje se instaló tubería PVC en el punto S-2. Las coordenadas informadas corresponden a la lectura GPS registrada en terreno junto a la boca del sondaje (UTM huso 18, WGS84).",
+    "Una vez finalizado el sondaje se instaló tubería PVC en el punto S-2. El nivel de agua medido al interior de la perforación fue de 4,60 m (sábado 03.10.2026, PM). Las coordenadas informadas corresponden a la lectura GPS registrada en terreno junto a la boca del sondaje (UTM huso 18, WGS84).",
     "Las cotas, la clasificación y las descripciones corresponden al registro de terreno y son de carácter preliminar, sujetas a verificación con los ensayos de laboratorio."
   ],
   "recuperacion": {
@@ -103,5 +103,16 @@
       "archivo": "/tmp/claude-0/-home-user-SOLUT/39b5970f-cb4b-5c4c-967f-0b3581954cc1/scratchpad/s2prep/caja_3.jpg",
       "pie": "Caja 3 – 11,55 a 15,00 m"
     }
-  ]
+  ],
+  "nivel_freatico": {
+    "intro": "Una vez finalizado el sondaje S-2 se midió el nivel de agua al interior de la perforación. El valor obtenido, medido desde la superficie del terreno, se presenta en la Tabla 1.",
+    "mediciones": [
+      [
+        "03.10.2026",
+        "Jornada del sábado (tarde)",
+        "4,60 m"
+      ]
+    ],
+    "nota": "El nivel de agua medido al interior de la perforación fue de 4,60 m de profundidad (sábado 03.10.2026, PM). Corresponde a una medición puntual realizada en la perforación, por lo que no establece un nivel freático estabilizado."
+  }
 }
